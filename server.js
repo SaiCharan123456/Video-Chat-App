@@ -31,7 +31,8 @@ app.get("/:room", (req, res) => {
 io.on("connection", (socket) => {
     socket.on("join-room", (roomId, userId) => {
         socket.join(roomId);
+        io.to(roomId).emit("user-connected", userId);
     })
 });
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3030);
